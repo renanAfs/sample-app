@@ -1,8 +1,11 @@
 #!/bin/bash
 
-mkdir tempdir
-mkdir tempdir/templates
-mkdir tempdir/static
+// filepath: c:\Users\renan\sample-app\sample-app.sh
+# ...existing code...
+mkdir -p tempdir
+mkdir -p tempdir/templates
+mkdir -p tempdir/static
+# ...existing code...
 
 cp sample_app.py tempdir/.
 cp -r templates/* tempdir/templates/.
@@ -17,6 +20,8 @@ echo "EXPOSE 5050" >> tempdir/Dockerfile
 echo "CMD python /home/myapp/sample_app.py" >> tempdir/Dockerfile
 
 cd tempdir
+sudo apt-get update
+sudo apt-get install docker.io
 docker build -t sampleapp .
 docker run -t -d -p 5050:5050 --name samplerunning sampleapp
 docker ps -a 
